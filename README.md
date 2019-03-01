@@ -1,7 +1,7 @@
 # SQL-2017-RLS-DEMO
 Row level security demo for SQL Server 2017
 
-This is a Demo Repo based on the above following youtube video:
+This is a Demo Repo based on the following youtube video:
 https://youtu.be/gkstHFlXvb8
 
 
