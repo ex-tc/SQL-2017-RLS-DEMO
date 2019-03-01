@@ -1,0 +1,9 @@
+C:\Users\bergstedta\source\repos\RLSDemo\RLSDemo\bin\Debug\RLSDemo.dacpac
+C:\Users\bergstedta\source\repos\RLSDemo\RLSDemo\bin\Debug\RLSDemo.dll
+C:\Users\bergstedta\source\repos\RLSDemo\RLSDemo\bin\Debug\RLSDemo.pdb
+C:\Users\bergstedta\source\repos\RLSDemo\RLSDemo\obj\Debug\Model.xml
+C:\Users\bergstedta\source\repos\RLSDemo\RLSDemo\obj\Debug\refactor.xml
+C:\Users\bergstedta\source\repos\RLSDemo\RLSDemo\obj\Debug\postdeploy.sql
+C:\Users\bergstedta\source\repos\RLSDemo\RLSDemo\obj\Debug\predeploy.sql
+C:\Users\bergstedta\source\repos\RLSDemo\RLSDemo\obj\Debug\RLSDemo.dll
+C:\Users\bergstedta\source\repos\RLSDemo\RLSDemo\obj\Debug\RLSDemo.pdb

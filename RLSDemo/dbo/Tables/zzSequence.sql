@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[zzSequence] (
+    [RIDX] BIGINT           NOT NULL,
+    [UID]  UNIQUEIDENTIFIER NOT NULL DEFAULT (NEWID())
+);
+

@@ -1,0 +1,33 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [Sec] (Schema)
+       [Sec].[RlsUser] (Table)
+       [Sec].[RlsUserXYLNK] (Table)
+       [Sec].[RlsUserABLNK] (Table)
+       [Sec].[PermiratedUserLink] (Table)
+       [Sec].[PermiratedUserLink].[IX_RLS_PERMITATION] (Index)
+       [dbo].[_zzMaterializedPermitations] (Table)
+       [dbo].[_zzMaterializedPermitations].[IX_RIDX] (Index)
+       [dbo].[_zzMaterializedPermitations].[idx_NC_PermitationID] (Index)
+       [dbo].[_zzMaterializedPermitations].[idx_NC_Suplimentary] (Index)
+       [dbo].[Permitations] (Table)
+       [dbo].[Permitations].[NonClusteredIndex-20190228-213240] (Index)
+       [dbo].[zzSequence] (Table)
+       Default Constraint: unnamed constraint on [dbo].[_zzMaterializedPermitations] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[zzSequence] (Default Constraint)
+       [SEC].[vPermiratedUserLink] (View)
+       [Sec].[fn_securitypredicate] (Function)
+       [SEC].[REBUILD_PermiratedUserLink] (Procedure)
+       [dbo].[PermitationID_Policy] (Security policy)
+
+** Supporting actions

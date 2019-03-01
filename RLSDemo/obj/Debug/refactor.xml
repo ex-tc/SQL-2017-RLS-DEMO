@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0">
+  <Operation Name="Rename Refactor" Key="416b0413-8096-4926-a750-312814405a6e" ChangeDateTime="03/01/2019 20:49:31" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[Permitations].[ProviderCode_SollisDerived]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Permitations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FK_A" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ed2f232c-6916-4436-92c4-cf74c7c02ff7" ChangeDateTime="03/01/2019 20:49:40" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[Permitations].[ProviderCode_ProviderDerived]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Permitations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FK_B" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ba776e5d-6578-4e6c-8891-531edd256702" ChangeDateTime="03/01/2019 20:49:49" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[Permitations].[CommissionerCode_SollisDerived]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Permitations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FK_X" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="dd5762a0-d470-478b-aa3c-97a4553c6680" ChangeDateTime="03/01/2019 20:49:56" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[Permitations].[CommissionerCode_DerivedFromGPCode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Permitations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FK_Y" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="01892d63-2f82-405f-b8ff-2f388c3ddae7" ChangeDateTime="03/01/2019 20:51:01" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[_zzMaterializedPermitations].[ProviderCode_SollisDerived]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[_zzMaterializedPermitations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FK_A" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ccbd140f-658a-4fc5-b819-2ab7b52c5905" ChangeDateTime="03/01/2019 20:51:07" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[_zzMaterializedPermitations].[ProviderCode_ProviderDerived]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[_zzMaterializedPermitations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FK_B" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bcb68d36-2e41-41a0-83f6-5d8d31e5a986" ChangeDateTime="03/01/2019 20:51:12" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[_zzMaterializedPermitations].[CommissionerCode_SollisDerived]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[_zzMaterializedPermitations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FK_X" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="aa914db2-aaea-4a38-a32d-7d2a779fc51d" ChangeDateTime="03/01/2019 20:51:21" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[_zzMaterializedPermitations].[CommissionerCode_DerivedFromGPCode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[_zzMaterializedPermitations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FK_Y" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9abecc7a-f214-4da0-b728-dec52d12bb91" ChangeDateTime="03/01/2019 20:55:00" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[Sec].[RlsUser].[CommisionerLNK]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Sec].[RlsUser]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AB_LNK" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="18f6a075-6998-474d-824b-04b39e1ff645" ChangeDateTime="03/01/2019 20:55:08" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[Sec].[RlsUser].[ProviderLNK]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Sec].[RlsUser]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="XY_LNK" />
+  </Operation>
+</Operations>

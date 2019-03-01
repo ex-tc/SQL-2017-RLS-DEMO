@@ -1,0 +1,143 @@
+﻿/*
+Post-Deployment Script Template							
+--------------------------------------------------------------------------------------
+ This file contains SQL statements that will be appended to the build script.		
+ Use SQLCMD syntax to include a file in the post-deployment script.			
+ Example:      :r .\myfile.sql								
+ Use SQLCMD syntax to reference a variable in the post-deployment script.		
+ Example:      :setvar TableName MyTable							
+               SELECT * FROM [$(TableName)]					
+--------------------------------------------------------------------------------------
+*/
+--SETUP BASE ENUMIRATOR
+DECLARE @@A AS TABLE (X INT)
+INSERT INTO @@A
+SELECT X=1 UNION ALL
+SELECT X=2 UNION ALL
+SELECT X=3 UNION ALL
+SELECT X=4 UNION ALL
+SELECT X=5 UNION ALL
+SELECT X=6 UNION ALL
+SELECT X=7 UNION ALL
+SELECT X=8 UNION ALL
+SELECT X=9 UNION ALL
+SELECT X=10
+
+--CREATE TEMP TABLE
+CREATE TABLE #SEED
+(
+RIDX BIGINT NOT NULL
+,UID UNIQUEIDENTIFIER DEFAULT(NEWID())
+)
+
+--GENERATE 10,000,000 ROWS
+INSERT INTO #SEED (RIDX)
+SELECT RIDX=ROW_NUMBER() OVER (ORDER BY X) FROM
+(
+SELECT A.X 
+			FROM @@A A --10
+			CROSS JOIN @@A B --100
+			CROSS JOIN @@A C --1000
+			CROSS JOIN @@A D --10000
+			CROSS JOIN @@A E --100000
+			CROSS JOIN @@A F --1000000
+			CROSS JOIN @@A G --10000000
+		--	CROSS JOIN @@A H
+) XX
+
+
+INSERT INTO ZZSEQUENCE
+SELECT * 
+FROM #SEED
+
+--CLEAN UP
+DROP TABLE #SEED
+GO
+--DISABLE FILTER POLICY
+ALTER SECURITY POLICY [dbo].[PermitationID_Policy] WITH (STATE = OFF)
+GO
+/****** Object:  Index [IX_RIDX]    Script Date: 01/03/2019 22:42:48 ******/
+DROP INDEX [IX_RIDX] ON [dbo].[_zzMaterializedPermitations] WITH ( ONLINE = OFF )
+GO
+
+TRUNCATE TABLE _zzMaterializedPermitations
+GO
+--BUILD Permutation Attribution
+INSERT INTO _zzMaterializedPermitations (RIDX,[UID],FK_A,FK_B,FK_X,FK_Y)
+SELECT  TOP (1000000) [RIDX]
+      ,[UID]
+	  ,FK_A = ABS(CONVERT(BIGINT,HASHBYTES('SHA1',CONVERT(VARCHAR(50),[UID])))%20)+1
+	  ,FK_B=CONVERT(INT,(RAND(ABS(CONVERT(BIGINT,HASHBYTES('SHA1',CONVERT(VARCHAR(50),NEWID())))%10)+1)*100000))%10+1
+	  ,FK_X=CONVERT(INT,(RAND(ABS(CONVERT(BIGINT,HASHBYTES('SHA1',CONVERT(VARCHAR(50),NEWID())))%150)+1)*100000))%10+1
+	  ,FK_Y=CONVERT(INT,(RAND(ABS(CONVERT(BIGINT,HASHBYTES('SHA1',CONVERT(VARCHAR(50),NEWID())))%150)+1)*100000))%10+1
+   
+FROM [dbo].[zzSequence]
+GO
+
+/****** Object:  Index [IX_RIDX]    Script Date: 01/03/2019 22:42:48 ******/
+CREATE UNIQUE CLUSTERED INDEX [IX_RIDX] ON [dbo].[_zzMaterializedPermitations]
+(
+	[RIDX] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+--BUILD PERMITATION TABLE
+TRUNCATE TABLE Permitations
+GO
+INSERT INTO Permitations (FK_A,FK_B,FK_X,FK_Y)
+SELECT DISTINCT FK_A,FK_B,FK_X,FK_Y
+FROM _zzMaterializedPermitations 
+ORDER BY 1,2,3,4
+GO
+
+
+
+--UPDATE PERMITATIONID ON FACT TABLE 
+UPDATE MP
+SET MP.PermitationID=P.PermitationID
+FROM Permitations P
+INNER JOIN _zzMaterializedPermitations MP 
+ON	P.FK_A=MP.FK_A 
+	AND P.FK_B=MP.FK_B 
+	AND P.FK_X=MP.FK_X 
+	AND P.FK_Y=MP.FK_Y
+GO
+
+
+--INSERT CURRENT USERS DETAILS
+TRUNCATE TABLE [Sec].[RlsUser]
+GO
+INSERT INTO [Sec].[RlsUser]
+SELECT [UserName]=SUSER_SNAME()
+      ,[SID]=CONVERT(uniqueidentifier,SUSER_SID())
+      ,[AB_LNK]=1
+      ,[XY_LNK]=1
+GO
+
+--INSERT ACCESS CONFIG FOR AB ID 1
+TRUNCATE TABLE SEC.RlsUserABLNK
+GO
+INSERT INTO SEC.RlsUserABLNK(RLSUserID,ABLNKID)
+SELECT TOP 1 RlsUserID,1 
+FROM SEC.RlsUser
+GO
+
+--GRANT ACCESS
+EXEC [Sec].[REBUILD_PermiratedUserLink]
+
+
+--DEPLOYMENT DONE
+--DISABLE FILTER POLICY
+ALTER SECURITY POLICY [dbo].[PermitationID_Policy] WITH (STATE = OFF)
+GO
+--SELECT WITHOUT FILTER
+SELECT UN_FILTERED_COUNT=COUNT(1) FROM _zzMaterializedPermitations
+GO
+
+--ENABLE SECURITY POLICY
+ALTER SECURITY POLICY [dbo].[PermitationID_Policy] WITH (STATE = ON)
+GO
+--SELECT WITH FILTER
+SELECT FILTERED_COUNT=COUNT(1) FROM _zzMaterializedPermitations
+
+GO
