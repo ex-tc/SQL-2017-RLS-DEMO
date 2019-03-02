@@ -8,5 +8,5 @@ https://youtu.be/gkstHFlXvb8
 
 It demonstrates how to build a Row level security model based on permitations with extensible Attrubutions.
 
-Please note that the Code was built in Visual Studio 2017 Comunity Edition.
+Please note that the Code was built in Visual Studio 2017 Community Edition.
 
